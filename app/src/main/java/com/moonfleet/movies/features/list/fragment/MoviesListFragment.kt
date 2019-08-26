@@ -60,9 +60,11 @@ class MoviesListFragment : BaseFragment() {
     }
 
     private fun initRecyclerView(layout: View) {
-        val layoutManager = GridLayoutManager(activity!!.applicationContext, 2, RecyclerView.VERTICAL, false)
-        layout.recycler_view_movies.setLayoutManager(layoutManager)
-        layout.recycler_view_movies.addItemDecoration(DividerItemDecoration(2, 32))
+        with(resources.getInteger(R.integer.movies_recycler_view_columns)) {
+            val layoutManager = GridLayoutManager(activity!!.applicationContext, this, RecyclerView.VERTICAL, false)
+            layout.recycler_view_movies.addItemDecoration(DividerItemDecoration(this, 32))
+            layout.recycler_view_movies.setLayoutManager(layoutManager)
+        }
         adapter = MoviesAdapter(listOf(), R.layout.item_movie_poster,
                 { _, view, poster ->
                     view.item_movie_tv_title.text = poster.movie.title

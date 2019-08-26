@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_text_size">20sp</dimen>
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="space0">2dp</dimen>
+    <dimen name="space1">4dp</dimen>
+    <dimen name="space2">8dp</dimen>
+    <dimen name="space3">10dp</dimen>
+    <dimen name="space4">12dp</dimen>
+    <dimen name="space5">16dp</dimen>
+    <dimen name="space6">18dp</dimen>
+    <dimen name="space7">20dp</dimen>
+    <dimen name="space8">24dp</dimen>
+    <dimen name="space9">32dp</dimen>
+    <dimen name="space10">36dp</dimen>
+    <dimen name="space11">48dp</dimen>
+    <dimen name="space12">54dp</dimen>
+    <dimen name="space13">60dp</dimen>
+    <dimen name="space14">72dp</dimen>
+    <dimen name="space15">96dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="text1">2sp</dimen>
+    <dimen name="text2">4sp</dimen>
+    <dimen name="text3">6sp</dimen>
+    <dimen name="text4">8sp</dimen>
+    <dimen name="text5">10sp</dimen>
+    <dimen name="text6">12sp</dimen>
+    <dimen name="text7">14sp</dimen>
+    <dimen name="text8">16sp</dimen>
+    <dimen name="text9">20sp</dimen>
+    <dimen name="text10">24sp</dimen>
+    <dimen name="text11">32sp</dimen>
+    <dimen name="text12">48sp</dimen>
+    <dimen name="progress_bar_size">64dp</dimen>
+</resources>

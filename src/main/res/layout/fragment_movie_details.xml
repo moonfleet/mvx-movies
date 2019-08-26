@@ -1,0 +1,42 @@
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewModel" type="com.moonfleet.movies.features.details.viewmodel.MovieDetailsViewModel"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_gray"
+            android:orientation="vertical"
+            android:padding="@dimen/space4">
+
+        <com.moonfleet.movies.view.FontTextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space2"
+                android:layout_marginRight="@dimen/space2"
+                android:gravity="start"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@{viewModel.titleLiveData, default=Title}"
+                app:typeface="@string/font_medium"
+                tools:text="Home Team"/>
+
+        <com.moonfleet.movies.view.FontTextView
+                android:id="@+id/text_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space2"
+                android:layout_marginRight="@dimen/space2"
+                android:gravity="start"
+                android:textColor="@color/lighter_gray"
+                android:textSize="16sp"
+                android:text="@{viewModel.overviewLiveData, default=Overview}"
+                app:typeface="@string/font_light"
+                tools:text="11 players"/>
+
+    </LinearLayout>
+</layout>

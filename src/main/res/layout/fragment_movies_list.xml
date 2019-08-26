@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_movies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.moonfleet.movies.view.TouchBlockingLayout
+        android:id="@+id/layout_progress_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/progress_layout"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <include
+            android:id="@+id/progress"
+            layout="@layout/layout_progress" />
+
+    </com.moonfleet.movies.view.TouchBlockingLayout>
+</RelativeLayout>

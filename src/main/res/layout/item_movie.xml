@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:outlineProvider="bounds"
+    android:padding="@dimen/space4"
+    tools:background="@color/dark_gray">
+
+    <com.moonfleet.movies.view.FontTextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space2"
+        android:layout_marginRight="@dimen/space2"
+        android:gravity="start"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:typeface="@string/font_medium"
+        tools:text="Home Team" />
+
+    <com.moonfleet.movies.view.FontTextView
+        android:id="@+id/text_overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space2"
+        android:layout_marginRight="@dimen/space2"
+        android:gravity="start"
+        android:textColor="@color/lighter_gray"
+        android:textSize="16sp"
+        app:typeface="@string/font_light"
+        tools:text="11 players" />
+
+</LinearLayout>

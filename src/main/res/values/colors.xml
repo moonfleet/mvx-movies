@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="primary_muted">#0D47A1</color>
+    <color name="colorAccent">@color/dark_green</color>
+    <color name="light_green">#CFF0E0</color>
+    <color name="dark_green">#27C9B8</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="text_color">#FF343746</color>
+    <color name="text_color_muted">#FF93A0B3</color>
+    <color name="light_blue">#ff83A1EC</color>
+    <color name="lighter_blue">#ff99BBFF</color>
+    <color name="deep_blue">#ff145BE4</color>
+    <color name="white75">#c0ffffff</color>
+    <color name="white50">#80ffffff</color>
+    <color name="white25">#40ffffff</color>
+    <color name="white125">#20ffffff</color>
+    <color name="white625">#10ffffff</color>
+    <color name="dark_gray">#ff363E50</color>
+    <color name="darker_gray">#ff262E40</color>
+    <color name="green">#ff25CBA5</color>
+    <color name="light_gray">#ff888888</color>
+    <color name="lighter_gray">#ffbfbfbf</color>
+    <color name="grass_green">#ffA4EB97</color>
+    <color name="grass_dark_green">#ff31BC69</color>
+    <color name="grass_darker_green">#ff10A665</color>
+    <color name="transparent">#00000000</color>
+    <color name="progress_layout">#edffffff</color>
+
+</resources>

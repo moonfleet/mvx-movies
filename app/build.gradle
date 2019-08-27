@@ -80,6 +80,7 @@ dependencies {
         exclude module: 'support-media-compat'
         exclude module: 'support-compat'
     }
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-alpha01'

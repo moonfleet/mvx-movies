@@ -1,20 +1,29 @@
 package com.moonfleet.movies.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.jakewharton.rxrelay2.PublishRelay
+import com.moonfleet.movies.plusAssign
+import com.moonfleet.movies.startWith
 import com.moonfleet.movies.util.BaseSchedulerProvider
 import io.reactivex.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-open class BaseViewModel(schedulerProvider: BaseSchedulerProvider) : ViewModel() {
+open class BaseViewModel<T>(schedulerProvider: BaseSchedulerProvider, private val reducer: Reducer<T>) : ViewModel() {
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val subscribeOnScheduler: Scheduler
     val observeOnScheduler: Scheduler
+    val viewState = MutableLiveData<T>().startWith(reducer.initialState)
+    val actionsRelay = PublishRelay.create<Action>()
 
     init {
         subscribeOnScheduler = schedulerProvider.io()
         observeOnScheduler = schedulerProvider.ui()
+        compositeDisposable += actionsRelay.subscribe { action ->
+            viewState.postValue(reducer.reduce(viewState.value!!, action))
+        }
     }
 
     override fun onCleared() {
@@ -23,6 +32,8 @@ open class BaseViewModel(schedulerProvider: BaseSchedulerProvider) : ViewModel()
             compositeDisposable.dispose()
         }
     }
+
+    fun onAction(action: Action) = actionsRelay.accept(action)
 
     fun <T> Single<T>.safeSubscribe(onSuccess: (T) -> Unit, onError: (Throwable) -> Unit = {}) : Disposable {
         val disposable = scheduleAsync().subscribe(onSuccess, onError)

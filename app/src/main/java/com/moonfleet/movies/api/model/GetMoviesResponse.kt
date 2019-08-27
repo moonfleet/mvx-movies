@@ -10,12 +10,18 @@ data class GetMoviesResponse(val page: Int, @SerializedName("results") val movie
                              @SerializedName("total_pages") val totalPages: Int,
                              @SerializedName("total_results") val totalResults: Int)
 
-data class Movie(val title: String, val overview: String, @SerializedName("poster_path") val posterPath: String) :
-    Parcelable {
+data class Movie(
+    val title: String,
+    val overview: String, @SerializedName("poster_path") val posterPath: String, @SerializedName(
+        "genre_ids"
+    ) val genreIds: List<Int>
+) :
+    Parcelable{
     constructor(source: Parcel) : this(
         source.readString(),
         source.readString(),
-        source.readString()
+        source.readString(),
+        ArrayList<Int>().apply { source.readList(this, Int::class.java.classLoader) }
     )
 
     override fun describeContents() = 0
@@ -24,6 +30,7 @@ data class Movie(val title: String, val overview: String, @SerializedName("poste
         writeString(title)
         writeString(overview)
         writeString(posterPath)
+        writeList(genreIds)
     }
 
     companion object {

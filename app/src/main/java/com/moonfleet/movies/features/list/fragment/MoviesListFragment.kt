@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moonfleet.movies.R
 import com.moonfleet.movies.api.model.MoviePoster
 import com.moonfleet.movies.base.BaseFragment
-import com.moonfleet.movies.features.list.state.MoviesListViewState
+import com.moonfleet.movies.features.list.state.MoviesListState
 import com.moonfleet.movies.features.list.viewmodel.MoviesListViewModel
 import com.moonfleet.movies.view.DividerItemDecoration
 import com.moonfleet.movies.view.MoviesAdapter
@@ -69,7 +68,7 @@ class MoviesListFragment : BaseFragment() {
                 { _, view, poster ->
                     view.item_movie_tv_title.text = poster.movie.title
                     view.item_movie_iv_poster.setImageBitmap(poster.bitmap)
-                    view.item_movie_container_details.setBackgroundColor(poster.palette.getVibrantColor(Color.WHITE))
+                    view.item_movie_container_details.setBackgroundColor(poster.palette?.getVibrantColor(Color.WHITE) ?: Color.WHITE)
                     view.item_movie_tv_genre.text = "Subtitle"
                     view
                 }, { poster -> viewModel.onMovieClick(poster)})
@@ -81,10 +80,10 @@ class MoviesListFragment : BaseFragment() {
     }
 
     private fun initStateObserver() {
-        viewModel.stateLiveData.observe(this, getStateObserver())
+        viewModel.viewState.observe(this, getStateObserver())
     }
 
-    private fun getStateObserver(): Observer<in MoviesListViewState> = Observer { state ->
+    private fun getStateObserver(): Observer<in MoviesListState> = Observer { state ->
         Timber.e("onState")
         showHideProgress(state.loading)
         if (state.error != null) {

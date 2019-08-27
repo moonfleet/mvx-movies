@@ -16,7 +16,7 @@ import javax.inject.Singleton
         ServiceModule::class,
         RepositoryModule::class,
         SchedulersModule::class,
-        GlideModule::class]
+        ViewModelsModule::class]
 )
 interface AppComponent : AndroidInjector<MoviesApplication> {
 

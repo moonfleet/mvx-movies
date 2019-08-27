@@ -37,7 +37,7 @@ class MovieDetailsFragment : BaseFragment() {
     }
 
     private fun initViews(layout: View) {
-        viewModel.onEmptyState(args.movie.title, args.movie.overview)
+        viewModel.onEmptyState(args.movie)
         with(layout.text_overview) {
             setOnClickListener { _ -> viewModel.onCloseClick() }
         }

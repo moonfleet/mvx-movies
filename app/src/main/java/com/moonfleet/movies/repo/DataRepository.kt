@@ -11,7 +11,12 @@ import com.moonfleet.movies.api.service.MovieService
 import com.moonfleet.movies.toGenresResult
 import com.moonfleet.movies.toMoviesResult
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.functions.BiFunction
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -39,22 +44,34 @@ class DataRepository @Inject constructor(var movieService: MovieService): APIRep
                     else -> Flowable.error(RuntimeException("Type incompatible"))
                 }
             }
-            .zipWith(getGenres().flatMap { result ->
-                when (result) {
-                    is NetworkResult.Genres -> Flowable.just(result.payload)
-                    is NetworkResult.HttpError -> Flowable.error(RuntimeException("${result.code}: ${result.message}"))
-                    else -> Flowable.error(RuntimeException("Type incompatible"))
-                }
-            }, BiFunction { movie: Movie, genres:List<Genre> ->
-                MoviePoster(movie = movie, genres = movie.genreIds.map { id -> genres.find { genre -> genre.id == id }?.name ?: "Genre" })
-            })
-            .map { poster ->
-                val bitmap = getBitmapFromURL("https://image.tmdb.org/t/p/w500${poster.movie.posterPath}")
-                bitmap?.let {
-                    poster.copy(palette = Palette.generate(it), bitmap = it)
-                } ?: poster
+            .flatMap { movie ->
+                Flowable.zip(getGenres().flatMap<List<Genre>> { result ->
+                    when (result) {
+                        is NetworkResult.Genres -> Flowable.just(result.payload)
+                        else -> Flowable.error(RuntimeException("Genres error"))
+                    }
+                }, getBitmapEmitter(movie.posterPath),
+                    BiFunction { genres : List<Genre>, bitmap: Bitmap ->
+                        MoviePoster(
+                            movie = movie,
+                            genres = movie.genreIds.map { id ->
+                                genres.find { genre -> genre.id == id }?.name ?: "Genre"
+                            },
+                            palette = Palette.generate(bitmap),
+                            bitmap = bitmap)
+                    })
             }
     }
+
+    private fun getBitmapEmitter(path: String) = Flowable.fromCallable {
+        val bitmap = getBitmapFromURL("https://image.tmdb.org/t/p/w500${path}")
+        if (bitmap != null) {
+            bitmap
+        } else {
+            throw RuntimeException("Bitmap empty")
+        }
+    }
+
 
     override fun getUpcomingMovies(): Flowable<MoviePoster> = getPopularMovies()
 

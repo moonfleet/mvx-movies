@@ -18,8 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.concurrent.TimeUnit
 
@@ -28,9 +27,6 @@ class MoviesListViewModelTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
-
-    @get:Rule
-    val incompatibleActionExceptionRule : ExpectedException = ExpectedException.none()
 
     @Mock
     lateinit var repository: DataRepository
@@ -60,10 +56,10 @@ class MoviesListViewModelTest {
         viewModel.viewState.observeForever(observer)
         viewModel.onEmptyState()
         testScheduler.advanceTimeBy(10, TimeUnit.SECONDS)
-        verify(observer).onChanged(MoviesListState.EMPTY)
-        verify(observer).onChanged(MoviesListState.LOADING)
-        verify(observer).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = true))
-        verify(observer).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = false))
+        verify(observer, times(1)).onChanged(MoviesListState.EMPTY)
+        verify(observer, times(1)).onChanged(MoviesListState.LOADING)
+        verify(observer, times(1)).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = true))
+        verify(observer, times(1)).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = false))
     }
 
     @After

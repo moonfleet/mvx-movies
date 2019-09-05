@@ -57,6 +57,7 @@ class MovieDetailsViewModelTest {
         testScheduler.advanceTimeBy(10, TimeUnit.SECONDS)
         verify(observer, times(1)).onChanged(MovieDetailsState.EMPTY)
         verify(observer, times(1)).onChanged(MovieDetailsState.fromPayload(TEST_MOVIE))
+        verifyNoMoreInteractions(observer)
     }
 
     @After

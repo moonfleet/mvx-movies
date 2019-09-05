@@ -48,32 +48,32 @@ class MoviesListStateReducerTest {
     }
 
     @Test
-    fun `Test reducer Empty to Loading`() {
+    fun `Test list reducer Empty to Loading`() {
         val state = reducer.reduce(MoviesListState.EMPTY, Action.StartLoading)
         assertEquals("Unexpected state", MoviesListState.LOADING, state)
     }
 
     @Test
-    fun `Test reducer Empty to Payload`() {
+    fun `Test list reducer Empty to Payload`() {
         val state = reducer.reduce(MoviesListState.EMPTY, Action.AddMovie(moviePoster))
         assertEquals("Unexpected state", MoviesListState.fromPayload(mutableListOf(moviePoster)), state)
     }
 
     @Test
-    fun `Test reducer Loading to Payload`() {
+    fun `Test list reducer Loading to Payload`() {
         val state = reducer.reduce(MoviesListState.LOADING, Action.AddMovie(moviePoster))
         assertEquals("Unexpected state", MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = true), state)
     }
 
     @Test
-    fun `Test reducer Loading to Empty`() {
+    fun `Test list reducer Loading to Empty`() {
         var state = reducer.reduce(MoviesListState.EMPTY, Action.StartLoading)
         state = reducer.reduce(state, Action.StopLoading)
         assertEquals("Unexpected state", MoviesListState.EMPTY, state)
     }
 
     @Test
-    fun `Test reducer incompatible action`() {
+    fun `Test list reducer incompatible action`() {
         incompatibleActionExceptionRule.expect(IllegalStateException::class.java)
         incompatibleActionExceptionRule.expectMessage("unable to reduce state")
         reducer.reduce(MoviesListState.EMPTY, Action.DisplayMovieDetails(movie))

@@ -17,6 +17,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
@@ -55,11 +56,12 @@ class MoviesListViewModelTest {
         `when`(repository.getPopularMovies()).thenReturn(Flowable.fromIterable(mutableListOf(moviePoster)))
         viewModel.viewState.observeForever(observer)
         viewModel.onEmptyState()
-        testScheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+        testScheduler.advanceTimeBy(365, TimeUnit.DAYS)
         verify(observer, times(1)).onChanged(MoviesListState.EMPTY)
         verify(observer, times(1)).onChanged(MoviesListState.LOADING)
         verify(observer, times(1)).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = true))
         verify(observer, times(1)).onChanged(MoviesListState.fromPayload(mutableListOf(moviePoster)).copy(loading = false))
+        verifyNoMoreInteractions(observer)
     }
 
     @After

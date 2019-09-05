@@ -44,13 +44,13 @@ class MovieDetailsStateReducerTest {
     }
 
     @Test
-    fun `Test reducer Empty to Payload`() {
+    fun `Test details reducer Empty to Payload`() {
         val state = reducer.reduce(MovieDetailsState.EMPTY, Action.DisplayMovieDetails(TEST_MOVIE))
         assertEquals("Unexpected state", MovieDetailsState.fromPayload(TEST_MOVIE), state)
     }
 
     @Test
-    fun `Test reducer incompatible action`() {
+    fun `Test details reducer incompatible action`() {
         incompatibleActionExceptionRule.expect(IllegalStateException::class.java)
         incompatibleActionExceptionRule.expectMessage("unable to reduce state")
         reducer.reduce(MovieDetailsState.EMPTY, Action.StartLoading)

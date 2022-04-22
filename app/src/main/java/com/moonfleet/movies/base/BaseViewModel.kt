@@ -12,6 +12,7 @@ import io.reactivex.disposables.Disposable
 
 open class BaseViewModel<T>(schedulerProvider: BaseSchedulerProvider, private val reducer: Reducer<T>) : ViewModel() {
 
+    // Update to test pipeline
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val subscribeOnScheduler: Scheduler
     val observeOnScheduler: Scheduler

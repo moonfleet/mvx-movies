@@ -11,7 +11,6 @@ import com.moonfleet.movies.R
 import com.moonfleet.movies.base.BaseFragment
 import com.moonfleet.movies.databinding.FragmentMovieDetailsBinding
 import com.moonfleet.movies.features.details.viewmodel.MovieDetailsViewModel
-import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import javax.inject.Inject
 
 class MovieDetailsFragment : BaseFragment() {
@@ -38,9 +37,9 @@ class MovieDetailsFragment : BaseFragment() {
 
     private fun initViews(layout: View) {
         viewModel.onEmptyState(args.movie)
-        with(layout.text_overview) {
-            setOnClickListener { _ -> viewModel.onCloseClick() }
-        }
+//        with(layout.text_overview) {
+//            setOnClickListener { _ -> viewModel.onCloseClick() }
+//        }
     }
 
     private fun initViewModel() {

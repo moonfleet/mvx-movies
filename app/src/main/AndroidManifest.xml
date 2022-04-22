@@ -11,7 +11,8 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
 
-        <activity android:name="com.moonfleet.movies.features.list.activity.MoviesActivity">
+        <activity android:name="com.moonfleet.movies.features.list.activity.MoviesActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -5,7 +5,6 @@ import androidx.navigation.findNavController
 import com.moonfleet.movies.R
 import com.moonfleet.movies.base.BaseActivity
 import com.moonfleet.movies.features.list.fragment.MoviesListFragment
-import kotlinx.android.synthetic.main.activity_container.*
 
 class MoviesActivity : BaseActivity(), MoviesListFragment.MoviesListFragmentHost {
 
@@ -22,7 +21,7 @@ class MoviesActivity : BaseActivity(), MoviesListFragment.MoviesListFragmentHost
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
     }
 
     override fun onNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()

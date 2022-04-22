@@ -17,9 +17,6 @@ import com.moonfleet.movies.features.list.state.MoviesListState
 import com.moonfleet.movies.features.list.viewmodel.MoviesListViewModel
 import com.moonfleet.movies.view.DividerItemDecoration
 import com.moonfleet.movies.view.MoviesAdapter
-import kotlinx.android.synthetic.main.fragment_movies_list.view.*
-import kotlinx.android.synthetic.main.fragment_movies_list.*
-import kotlinx.android.synthetic.main.item_movie_poster.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -59,20 +56,20 @@ class MoviesListFragment : BaseFragment() {
     }
 
     private fun initRecyclerView(layout: View) {
-        with(resources.getInteger(R.integer.movies_recycler_view_columns)) {
-            val layoutManager = GridLayoutManager(activity!!.applicationContext, this, RecyclerView.VERTICAL, false)
-            layout.recycler_view_movies.addItemDecoration(DividerItemDecoration(this, 32))
-            layout.recycler_view_movies.setLayoutManager(layoutManager)
-        }
-        adapter = MoviesAdapter(listOf(), R.layout.item_movie_poster,
-                { _, view, poster ->
-                    view.item_movie_tv_title.text = poster.movie.title
-                    view.item_movie_iv_poster.setImageBitmap(poster.bitmap)
-                    view.item_movie_container_details.setBackgroundColor(poster.palette?.getVibrantColor(Color.WHITE) ?: Color.WHITE)
-                    view.item_movie_tv_genre.text = "Subtitle"
-                    view
-                }, { poster -> viewModel.onMovieClick(poster)})
-        layout.recycler_view_movies.setAdapter(adapter)
+//        with(resources.getInteger(R.integer.movies_recycler_view_columns)) {
+//            val layoutManager = GridLayoutManager(activity!!.applicationContext, this, RecyclerView.VERTICAL, false)
+//            layout.recycler_view_movies.addItemDecoration(DividerItemDecoration(this, 32))
+//            layout.recycler_view_movies.setLayoutManager(layoutManager)
+//        }
+//        adapter = MoviesAdapter(listOf(), R.layout.item_movie_poster,
+//                { _, view, poster ->
+//                    view.item_movie_tv_title.text = poster.movie.title
+//                    view.item_movie_iv_poster.setImageBitmap(poster.bitmap)
+//                    view.item_movie_container_details.setBackgroundColor(poster.palette?.getVibrantColor(Color.WHITE) ?: Color.WHITE)
+//                    view.item_movie_tv_genre.text = "Subtitle"
+//                    view
+//                }, { poster -> viewModel.onMovieClick(poster)})
+//        layout.recycler_view_movies.setAdapter(adapter)
     }
 
     private fun initViewModel() {
@@ -80,7 +77,7 @@ class MoviesListFragment : BaseFragment() {
     }
 
     private fun initStateObserver() {
-        viewModel.viewState.observe(this, getStateObserver())
+        viewModel.viewState.observe(viewLifecycleOwner, getStateObserver())
     }
 
     private fun getStateObserver(): Observer<in MoviesListState> = Observer { state ->
@@ -99,7 +96,7 @@ class MoviesListFragment : BaseFragment() {
         adapter.updateItems(movies)
     }
 
-    override fun getProgressView(): View? = layout_progress_loading
+//    override fun getProgressView(): View? = layout_progress_loading
 
     companion object {
         fun newInstance(): MoviesListFragment = MoviesListFragment()
